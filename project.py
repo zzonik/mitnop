@@ -17,11 +17,6 @@ names_reshaped = names[0, 0].reshape(-1, 1)
 
 # Convert the reshaped array of strings to a Pandas DataFrame
 df_names = pd.DataFrame(names_reshaped, columns=['Name'])
-# Convert the "Name" column to strings
-df_names['Name'] = df_names['Name'].astype(str)
-# Remove brackets from the names in the "Name" column
-df_names['Name'] = df_names['Name'].str.replace('[', "").str.replace(']', "")
-df_names['Name'] = df_names['Name'].str.replace("'", "")
 
 gender = wiki_variable['gender']
 gender_reshaped = gender[0, 0].reshape(-1, 1)
@@ -55,3 +50,43 @@ df_combined['Year taken'] = year_taken_reshaped
 print(df_combined)
 df_combined['At time years old'] = df_combined['Year taken'] - df_combined['Birth Year']
 print(df_combined)
+df_combined = df_combined.drop(columns=['Birth Year', 'Year taken', 'Name'])
+print(df_combined)
+full_path = wiki_variable['full_path']
+full_path_value = full_path[0, 0][0]  # Extract the value from the 2D array
+
+df_combined['Full path'] = full_path_value
+
+df_combined['Full path'] = df_combined['Full path'].astype(str)
+# Remove brackets from the names in the "Full path" column
+df_combined['Full path'] = df_combined['Full path'].str.replace('[', "").str.replace(']', "")
+df_combined['Full path'] = df_combined['Full path'].str.replace("'", "")
+print(df_combined)
+
+face_location = wiki_variable['face_location']
+face_location_value = face_location[0, 0][0] 
+
+df_combined['Face location'] = face_location_value
+
+#df_combined['Face location'] = df_combined['Face location'].astype(str)
+# Remove brackets from the names in the "Full path" column
+#df_combined['Face location'] = df_combined['Face location'].str.replace('[', "").str.replace(']', "")
+#df_combined['Face location'] = df_combined['Face location'].str.replace("'", "")
+print(df_combined)
+
+face_score = wiki_variable['face_score']
+face_score_value = face_score[0, 0][0]  
+
+df_combined['Face Score'] = face_score_value
+
+print(df_combined)
+
+second_face_score = wiki_variable['second_face_score']
+second_face_score_value = second_face_score[0, 0][0]  
+
+df_combined['Second Face Score'] = second_face_score_value
+
+print(df_combined)
+
+
+
